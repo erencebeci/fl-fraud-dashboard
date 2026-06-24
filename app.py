@@ -286,55 +286,12 @@ with tab3:
     </div>
     """, unsafe_allow_html=True)
 
-    # ─── Replace the "Upload Your Result Plots" section with this ───
-    st.markdown("#### Upload Your Result Plots")
-    st.caption("Add your saved figures from the notebook here — they'll appear in the dashboard.")
-    
-    # Ensure local directory exists
-    os.makedirs("saved_plots/results", exist_ok=True)
-    
-    # Layout file uploader and clear button side-by-side
-    upload_col, clear_col = st.columns([4, 1])
-    
-    with upload_col:
-        uploaded_plots = st.file_uploader(
-            "Upload result plots (PNG/JPG)",
-            type=["png", "jpg", "jpeg"],
-            accept_multiple_files=True,
-            key="result_plots",
-            label_visibility="collapsed"
-        )
-
-    with clear_col:
-        # Button to delete all saved files in this directory
-        if st.button("🗑️ Clear All Plots", key="clear_res_btn", use_container_width=True):
-            for f in os.listdir("saved_plots/results"):
-                file_path = os.path.join("saved_plots/results", f)
-                if os.path.isfile(file_path):
-                    os.remove(file_path)
-            st.rerun()
-    
-    # 1. Save newly uploaded images to disk
-    if uploaded_plots:
-        for img in uploaded_plots:
-            file_path = os.path.join("saved_plots/results", img.name)
-            if not os.path.exists(file_path):
-                with open(file_path, "wb") as f:
-                    f.write(img.getbuffer())
-                    
-    # 2. Read and display all images currently saved on disk (Upload Order)
-    raw_results = [
-        os.path.join("saved_plots/results", f) 
-        for f in os.listdir("saved_plots/results") 
-        if f.lower().endswith(('png', 'jpg', 'jpeg'))
-    ]
-    saved_results = sorted(raw_results, key=os.path.getmtime)  # <-- sorts by upload time
-    
-    if saved_results:
-        for img_path in saved_results:
-            # Displays each image across the entire wide tab container
-            st.image(img_path, caption=os.path.basename(img_path), use_container_width=True)
-            st.markdown("<br>", unsafe_allow_html=True) # Adds breathing room between large plots
+    # Inside Tab 3 — No uploaders, pure portfolio display
+    st.markdown("#### Final Evaluation Plots")
+    st.image("final_plots/Unknown.png", use_container_width=True)
+    st.image("final_plots/Unknown-2.png", use_container_width=True)
+    st.image("final_plots/Unknown-3.png", use_container_width=True)
+    st.image("final_plots/Unknown-4.png", use_container_width=True)
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # TAB 4 — ABLATION
@@ -385,54 +342,16 @@ with tab4:
     </div>
     """, unsafe_allow_html=True)
 
-    # ─── Replace the "Upload Your Ablation Plots" section with this ───
-    st.markdown("#### Upload Your Ablation Plots")
-    
-    # Ensure local directory exists
-    os.makedirs("saved_plots/ablation", exist_ok=True)
-    
-    # Layout file uploader and clear button side-by-side
-    upload_col, clear_col = st.columns([4, 1])
-    
-    with upload_col:
-        uploaded_ablation = st.file_uploader(
-            "Upload ablation figures from notebook Phase 6",
-            type=["png", "jpg", "jpeg"],
-            accept_multiple_files=True,
-            key="ablation_plots",
-            label_visibility="collapsed"
-        )
-
-    with clear_col:
-        # Button to delete all saved files in this directory
-        if st.button("🗑️ Clear All Plots", key="clear_abl_btn", use_container_width=True):
-            for f in os.listdir("saved_plots/ablation"):
-                file_path = os.path.join("saved_plots/ablation", f)
-                if os.path.isfile(file_path):
-                    os.remove(file_path)
-            st.rerun()
-    
-    # 1. Save newly uploaded images to disk
-    if uploaded_ablation:
-        for img in uploaded_ablation:
-            file_path = os.path.join("saved_plots/ablation", img.name)
-            if not os.path.exists(file_path):
-                with open(file_path, "wb") as f:
-                    f.write(img.getbuffer())
-                    
-    # 2. Read and display all images currently saved on disk (Upload Order)
-    raw_ablation = [
-        os.path.join("saved_plots/ablation", f) 
-        for f in os.listdir("saved_plots/ablation") 
-        if f.lower().endswith(('png', 'jpg', 'jpeg'))
-    ]
-    saved_ablation = sorted(raw_ablation, key=os.path.getmtime)  # <-- sorts by upload time
-    
-    if saved_ablation:
-        for img_path in saved_ablation:
-            # Displays each image across the entire wide tab container
-            st.image(img_path, caption=os.path.basename(img_path), use_container_width=True)
-            st.markdown("<br>", unsafe_allow_html=True) # Adds breathing room between large plots
+    # Inside Tab 4 — No uploaders, pure portfolio display
+    st.markdown("#### Final Ablation Plots")
+    st.image("final_plots/Unknown-5.png", use_container_width=True)
+    st.image("final_plots/Unknown-6.png", use_container_width=True)
+    st.image("final_plots/Unknown-7.png", use_container_width=True)
+    st.image("final_plots/Unknown-8.png", use_container_width=True)
+    st.image("final_plots/Unknown-9.png", use_container_width=True)
+    st.image("final_plots/Unknown-10.png", use_container_width=True)
+    st.image("final_plots/Unknown-11.png", use_container_width=True)
+    st.image("final_plots/Unknown-12.png", use_container_width=True)
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # TAB 5 — NEGATIVE TRANSFER
