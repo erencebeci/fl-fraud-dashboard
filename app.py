@@ -308,7 +308,7 @@ with tab3:
                 with open(file_path, "wb") as f:
                     f.write(img.getbuffer())
                     
-    # 2. Read and display all images currently saved on disk
+    # 2. Read and display all images currently saved on disk (Full Row Layout)
     saved_results = [
         os.path.join("saved_plots/results", f) 
         for f in os.listdir("saved_plots/results") 
@@ -316,10 +316,10 @@ with tab3:
     ]
     
     if saved_results:
-        cols = st.columns(min(len(saved_results), 3))
-        for i, img_path in enumerate(saved_results):
-            with cols[i % 3]:
-                st.image(img_path, caption=os.path.basename(img_path), use_container_width=True)
+        for img_path in saved_results:
+            # Displays each image across the entire wide tab container
+            st.image(img_path, caption=os.path.basename(img_path), use_container_width=True)
+            st.markdown("<br>", unsafe_allow_html=True) # Adds breathing room between large plots
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # TAB 4 — ABLATION
@@ -391,7 +391,7 @@ with tab4:
                 with open(file_path, "wb") as f:
                     f.write(img.getbuffer())
                     
-    # 2. Read and display all images currently saved on disk
+    # 2. Read and display all images currently saved on disk (Full Row Layout)
     saved_ablation = [
         os.path.join("saved_plots/ablation", f) 
         for f in os.listdir("saved_plots/ablation") 
@@ -399,10 +399,10 @@ with tab4:
     ]
     
     if saved_ablation:
-        cols = st.columns(min(len(saved_ablation), 3))
-        for i, img_path in enumerate(saved_ablation):
-            with cols[i % 3]:
-                st.image(img_path, caption=os.path.basename(img_path), use_container_width=True)
+        for img_path in saved_ablation:
+            # Displays each image across the entire wide tab container
+            st.image(img_path, caption=os.path.basename(img_path), use_container_width=True)
+            st.markdown("<br>", unsafe_allow_html=True) # Adds breathing room between large plots
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # TAB 5 — NEGATIVE TRANSFER
