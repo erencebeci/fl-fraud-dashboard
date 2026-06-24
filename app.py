@@ -411,7 +411,7 @@ with tab5:
             x=["Without Risk Features", "With Risk Features"],
             y=gaps,
             marker_color=["#34d399", "#ef4444"],
-            text=[f"{g:.3f}", f"{g:.3f}" if False else f"{gaps[1]:.3f}"],
+            text=[f"{gaps[0]:.3f}", f"{gaps[1]:.3f}"],
             textposition="outside"
         ))
         fig_gap.data[0].text = [f"{v:.3f}" for v in gaps]
