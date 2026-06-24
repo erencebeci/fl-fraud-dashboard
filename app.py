@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import plotly.graph_objects as go
 import plotly.express as px
@@ -285,19 +286,40 @@ with tab3:
     </div>
     """, unsafe_allow_html=True)
 
+    # ─── Replace the "Upload Your Result Plots" section with this ───
     st.markdown("#### Upload Your Result Plots")
     st.caption("Add your saved figures from the notebook here — they'll appear in the dashboard.")
+    
+    # Ensure local directory exists
+    os.makedirs("saved_plots/results", exist_ok=True)
+    
     uploaded_plots = st.file_uploader(
         "Upload result plots (PNG/JPG)",
         type=["png", "jpg", "jpeg"],
         accept_multiple_files=True,
         key="result_plots"
     )
+    
+    # 1. Save newly uploaded images to disk
     if uploaded_plots:
-        cols = st.columns(min(len(uploaded_plots), 3))
-        for i, img in enumerate(uploaded_plots):
+        for img in uploaded_plots:
+            file_path = os.path.join("saved_plots/results", img.name)
+            if not os.path.exists(file_path):
+                with open(file_path, "wb") as f:
+                    f.write(img.getbuffer())
+                    
+    # 2. Read and display all images currently saved on disk
+    saved_results = [
+        os.path.join("saved_plots/results", f) 
+        for f in os.listdir("saved_plots/results") 
+        if f.lower().endswith(('png', 'jpg', 'jpeg'))
+    ]
+    
+    if saved_results:
+        cols = st.columns(min(len(saved_results), 3))
+        for i, img_path in enumerate(saved_results):
             with cols[i % 3]:
-                st.image(img, caption=img.name, use_container_width=True)
+                st.image(img_path, caption=os.path.basename(img_path), use_container_width=True)
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # TAB 4 — ABLATION
@@ -348,18 +370,39 @@ with tab4:
     </div>
     """, unsafe_allow_html=True)
 
+    # ─── Replace the "Upload Your Ablation Plots" section with this ───
     st.markdown("#### Upload Your Ablation Plots")
+    
+    # Ensure local directory exists
+    os.makedirs("saved_plots/ablation", exist_ok=True)
+    
     uploaded_ablation = st.file_uploader(
         "Upload ablation figures from notebook Phase 6",
         type=["png", "jpg", "jpeg"],
         accept_multiple_files=True,
         key="ablation_plots"
     )
+    
+    # 1. Save newly uploaded images to disk
     if uploaded_ablation:
-        cols = st.columns(min(len(uploaded_ablation), 3))
-        for i, img in enumerate(uploaded_ablation):
+        for img in uploaded_ablation:
+            file_path = os.path.join("saved_plots/ablation", img.name)
+            if not os.path.exists(file_path):
+                with open(file_path, "wb") as f:
+                    f.write(img.getbuffer())
+                    
+    # 2. Read and display all images currently saved on disk
+    saved_ablation = [
+        os.path.join("saved_plots/ablation", f) 
+        for f in os.listdir("saved_plots/ablation") 
+        if f.lower().endswith(('png', 'jpg', 'jpeg'))
+    ]
+    
+    if saved_ablation:
+        cols = st.columns(min(len(saved_ablation), 3))
+        for i, img_path in enumerate(saved_ablation):
             with cols[i % 3]:
-                st.image(img, caption=img.name, use_container_width=True)
+                st.image(img_path, caption=os.path.basename(img_path), use_container_width=True)
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # TAB 5 — NEGATIVE TRANSFER
