@@ -2,7 +2,7 @@
 
 Interactive Streamlit dashboard for the Federated Learning for Cross-Bank Fraud Detection graduation project.
 
-**[Live Demo →](https://your-app.streamlit.app)** *(update after deployment)*
+**[Live Demo →](https://erencebeci-fl-fraud-dashboard.streamlit.app)** *(update after deployment)*
 
 ## What this shows
 - Federation setup: 4 synthetic heterogeneous banks
