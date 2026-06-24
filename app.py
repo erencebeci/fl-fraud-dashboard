@@ -322,12 +322,13 @@ with tab3:
                 with open(file_path, "wb") as f:
                     f.write(img.getbuffer())
                     
-    # 2. Read and display all images currently saved on disk (Full Row Layout)
-    saved_results = [
+    # 2. Read and display all images currently saved on disk (Upload Order)
+    raw_results = [
         os.path.join("saved_plots/results", f) 
         for f in os.listdir("saved_plots/results") 
         if f.lower().endswith(('png', 'jpg', 'jpeg'))
     ]
+    saved_results = sorted(raw_results, key=os.path.getmtime)  # <-- sorts by upload time
     
     if saved_results:
         for img_path in saved_results:
@@ -419,12 +420,13 @@ with tab4:
                 with open(file_path, "wb") as f:
                     f.write(img.getbuffer())
                     
-    # 2. Read and display all images currently saved on disk (Full Row Layout)
-    saved_ablation = [
+    # 2. Read and display all images currently saved on disk (Upload Order)
+    raw_ablation = [
         os.path.join("saved_plots/ablation", f) 
         for f in os.listdir("saved_plots/ablation") 
         if f.lower().endswith(('png', 'jpg', 'jpeg'))
     ]
+    saved_ablation = sorted(raw_ablation, key=os.path.getmtime)  # <-- sorts by upload time
     
     if saved_ablation:
         for img_path in saved_ablation:
