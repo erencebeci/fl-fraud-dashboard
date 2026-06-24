@@ -299,6 +299,15 @@ with tab3:
         accept_multiple_files=True,
         key="result_plots"
     )
+
+    with clear_col:
+        # Button to delete all saved files in this directory
+        if st.button("🗑️ Clear All Plots", key="clear_res_btn", use_container_width=True):
+            for f in os.listdir("saved_plots/results"):
+                file_path = os.path.join("saved_plots/results", f)
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
+            st.rerun()
     
     # 1. Save newly uploaded images to disk
     if uploaded_plots:
@@ -382,6 +391,15 @@ with tab4:
         accept_multiple_files=True,
         key="ablation_plots"
     )
+
+    with clear_col:
+        # Button to delete all saved files in this directory
+        if st.button("🗑️ Clear All Plots", key="clear_abl_btn", use_container_width=True):
+            for f in os.listdir("saved_plots/ablation"):
+                file_path = os.path.join("saved_plots/ablation", f)
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
+            st.rerun()
     
     # 1. Save newly uploaded images to disk
     if uploaded_ablation:
