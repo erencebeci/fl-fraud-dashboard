@@ -293,12 +293,17 @@ with tab3:
     # Ensure local directory exists
     os.makedirs("saved_plots/results", exist_ok=True)
     
-    uploaded_plots = st.file_uploader(
-        "Upload result plots (PNG/JPG)",
-        type=["png", "jpg", "jpeg"],
-        accept_multiple_files=True,
-        key="result_plots"
-    )
+    # Layout file uploader and clear button side-by-side
+    upload_col, clear_col = st.columns([4, 1])
+    
+    with upload_col:
+        uploaded_plots = st.file_uploader(
+            "Upload result plots (PNG/JPG)",
+            type=["png", "jpg", "jpeg"],
+            accept_multiple_files=True,
+            key="result_plots",
+            label_visibility="collapsed"
+        )
 
     with clear_col:
         # Button to delete all saved files in this directory
@@ -385,12 +390,17 @@ with tab4:
     # Ensure local directory exists
     os.makedirs("saved_plots/ablation", exist_ok=True)
     
-    uploaded_ablation = st.file_uploader(
-        "Upload ablation figures from notebook Phase 6",
-        type=["png", "jpg", "jpeg"],
-        accept_multiple_files=True,
-        key="ablation_plots"
-    )
+    # Layout file uploader and clear button side-by-side
+    upload_col, clear_col = st.columns([4, 1])
+    
+    with upload_col:
+        uploaded_ablation = st.file_uploader(
+            "Upload ablation figures from notebook Phase 6",
+            type=["png", "jpg", "jpeg"],
+            accept_multiple_files=True,
+            key="ablation_plots",
+            label_visibility="collapsed"
+        )
 
     with clear_col:
         # Button to delete all saved files in this directory
